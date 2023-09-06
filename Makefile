@@ -29,4 +29,8 @@ install_infra: k8s_connect
 # loads the docker containers into the kind environments
 .PHONY: k8s_side_load
 k8s_side_load:
-	kind load docker-image project-example --name $(KIND_INSTANCE)
+	kind load docker-image fib-app --name $(KIND_INSTANCE)
+
+.PHONY: build_docker_image
+build_docker_image:
+	docker build -t fib-app:latest .
