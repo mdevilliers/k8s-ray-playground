@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM rayproject/ray:2.6.3
 
 ENV POETRY_VERSION=1.6.1
 
