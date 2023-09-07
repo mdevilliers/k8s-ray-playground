@@ -20,12 +20,12 @@ k8s_connect:
 .PHONY: helm_init
 helm_init:
 	helm repo add kuberay https://ray-project.github.io/kuberay-helm/
-
+	helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+	helm repo update
+	
 .PHONY: install_infra
 install_infra: k8s_connect
 	helm install kuberay-operator kuberay/kuberay-operator --version $(RAY_OPERATOR_VERSION)
-	helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-	helm repo update
 	helm --namespace prometheus-system install prometheus prometheus-community/kube-prometheus-stack --create-namespace --version 48.2.1 -f ./k8s/prometheus/overrides.yaml
 
 # install cluster with code embedded as a config map :-)
